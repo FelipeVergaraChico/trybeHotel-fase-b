@@ -33,14 +33,14 @@ namespace TrybeHotel.Repository
             }
             catch (Exception e)
             {
-                
+
                 throw new Exception(e.Message);
             }
         }
         public UserDto Add(UserDtoInsert user)
         {
             try
-           {
+            {
                 var userEx = _context.Users.FirstOrDefault(u => u.Email == user.Email);
                 if (userEx != null){
                     throw new Exception("User email already exists");
@@ -62,11 +62,11 @@ namespace TrybeHotel.Repository
                         userType = res.UserType
                     };
                 }
-           }
-           catch (Exception e)
-           {
+            }
+            catch (Exception e)
+            {
                 throw new Exception(e.Message);
-           }
+            }
         }
 
         public UserDto GetUserByEmail(string userEmail)
@@ -76,7 +76,7 @@ namespace TrybeHotel.Repository
 
         public IEnumerable<UserDto> GetUsers()
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
     }
