@@ -23,14 +23,35 @@ namespace TrybeHotel.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Policy = "Admin")]
         public IActionResult PostRoom([FromBody] Room room){
-            throw new NotImplementedException();
+            try
+            {
+                var res = _repository.AddRoom(room);
+                return Created("", res);
+            }
+            catch (Exception e)
+            {
+                
+                return Unauthorized(new {message = e.Message});
+            }
         }
 
         [HttpDelete("{RoomId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Policy = "Admin")]
         public IActionResult Delete(int RoomId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _repository.DeleteRoom(RoomId);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return Unauthorized(new {message = e.Message});
+            }
         }
     }
 }
