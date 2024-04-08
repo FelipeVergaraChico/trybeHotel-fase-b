@@ -18,7 +18,32 @@ namespace TrybeHotel.Repository
         
         public HotelDto AddHotel(Hotel hotel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Hotels.Add(hotel);
+                _context.SaveChanges();
+                var city = _context.Cities.First(c => c.CityId == hotel.CityId);
+                if (city != null)
+                {
+                    return new HotelDto()
+                    {
+                        hotelId = hotel.HotelId,
+                        name = hotel.Name,
+                        address = hotel.Address,
+                        cityId = hotel.CityId,
+                        cityName = city.Name
+                    };
+                }
+                else
+                {
+                    throw new Exception("City Not Found");
+                }
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
     }
 }

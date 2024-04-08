@@ -17,7 +17,7 @@ namespace TrybeHotel.Controllers
         {
             _repository = repository;
         }
-        
+
         [HttpGet]
         public IActionResult GetUsers(){
             throw new NotImplementedException();
@@ -26,7 +26,8 @@ namespace TrybeHotel.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] UserDtoInsert user)
         {
-            throw new NotImplementedException();
+            var res = _repository.Add(user);
+            return Created("", res);
         }
     }
 }
