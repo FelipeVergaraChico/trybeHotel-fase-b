@@ -34,7 +34,7 @@ namespace TrybeHotel.Controllers
             catch (Exception e)
             {
                 
-                throw new Exception(e.Message);
+                return Conflict(new {message = e.Message});
             }
         }
     }

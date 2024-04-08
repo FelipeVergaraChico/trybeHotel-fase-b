@@ -45,20 +45,21 @@ namespace TrybeHotel.Repository
                 if (userEx != null){
                     throw new Exception("User email already exists");
                 }
-                var newUser = new User
+                var userNew = new User
                 {
                     Name = user.Name,
                     Email = user.Email,
                     Password = user.Password,
                     UserType = "client"
                 };
-                _context.Users.Add(newUser);
+                _context.Users.Add(userNew);
                 _context.SaveChanges();
-                return new UserDto(){
-                    UserId = newUser.UserId,
-                    Name = newUser.Name,
-                    Email = newUser.Email,
-                    UserType = newUser.UserType
+                return new UserDto
+                {
+                    UserId = userNew.UserId,
+                    Name = userNew.Name,
+                    Email = userNew.Email,
+                    UserType = userNew.UserType
                 };
             }
             catch (Exception e)
