@@ -26,8 +26,16 @@ namespace TrybeHotel.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] UserDtoInsert user)
         {
-            var res = _repository.Add(user);
-            return Created("", res);
+            try
+            {
+                var res = _repository.Add(user);
+                return Created("", res);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
     }
 }
