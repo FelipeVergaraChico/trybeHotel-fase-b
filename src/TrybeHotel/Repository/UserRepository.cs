@@ -44,24 +44,21 @@ namespace TrybeHotel.Repository
                 var userEx = _context.Users.FirstOrDefault(u => u.Email == user.Email);
                 if (userEx != null){
                     throw new Exception("User email already exists");
-                } else {
-                    var userEntity = new User()
-                    {
-                        Name = user.Name,
-                        Email = user.Email,
-                        Password = user.Password,
-                        UserType = "client"
-                    };
-                    _context.Users.Add(userEntity);
-                    _context.SaveChanges();
-                    var res = _context.Users.First(u => u.Email == userEntity.Email);
-                    return new UserDto(){
-                        userId = res.UserId,
-                        Name = res.Name,
-                        Email = res.Email,
-                        userType = res.UserType
-                    };
                 }
+                var newUser = new User(){
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    UserType = "user"
+                };
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+                return new UserDto(){
+                    userId = newUser.UserId,
+                    Name = newUser.Name,
+                    Email = newUser.Email,
+                    userType = newUser.UserType
+                };
             }
             catch (Exception e)
             {
