@@ -37,7 +37,7 @@ namespace TrybeHotel.Services
         {
             var claims = new ClaimsIdentity();
             claims.AddClaim(new Claim(ClaimTypes.Email, user.Email!));
-            claims.AddClaim(new Claim(ClaimTypes.Role, user.userType!));
+            claims.AddClaim(new Claim(ClaimTypes.Role, user.UserType!));
             return claims;
         }
     }
